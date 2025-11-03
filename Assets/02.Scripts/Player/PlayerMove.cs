@@ -2,10 +2,12 @@ using UnityEngine;
 // 플레이어 이동
 public class PlayerMove : MonoBehaviour
 {
+    [Header("능력치")]
     public float Speed = 0.2f;
     public float Exeleration = 0.05f;
     public float MaxSpeed = 0.5f;
     public float MinSpeed = 0.1f;
+    [Header("이동 범위")]   
     public float MaxX = 2.25f;
     public float MinX = -2.25f;
     public float MaxY = 5f;
@@ -57,14 +59,14 @@ public class PlayerMove : MonoBehaviour
         // 컴퓨터 2 : 100fps : Update -> 초당 100 실행 -> 10 * 100 = 1000  * Time.deltaTime
 
         // 포지션 값에 제한을 준다.
-        // 맨 마지막에 있는 newPosition 값을 갱신하는 함수가 아래 식 위에 있어서 처음에 의도대로 움직여지지 않았다,ㅁ
+        // 맨 마지막에 있는 newPosition 값을 갱신하는 함수가 아래 식 위에 있어서 처음에 의도대로 움직여지지 않았다.
         if (newPosition.x >= MaxX)
         {
-            newPosition.x = MaxX;
+            newPosition.x = MinX;
         }
         else if (newPosition.x <= MinX)
         {
-            newPosition.x = MinX;
+            newPosition.x = MaxX;
         }
 
         if (newPosition.y >= MaxY)
