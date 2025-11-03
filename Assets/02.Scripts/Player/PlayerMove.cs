@@ -3,7 +3,15 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float Speed = 0.2f;
-    
+    public float Exeleration = 0.05f;
+    public float MaxSpeed = 0.5f;
+    public float MinSpeed = 0.1f;
+    public float MaxX = 2.25f;
+    public float MinX = -2.25f;
+    public float MaxY = 5f;
+    public float MinY = -5f;
+
+
     private void Start()
     {
         // 목표
@@ -16,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    
+
     private void Update()
     {
         // 1. 키보드 입력을 감지한다.
@@ -39,7 +47,7 @@ public class PlayerMove : MonoBehaviour
 
         //       새로운위치    현재 위치     방향
         Vector2 newPosition = position + direction * Speed * Time.deltaTime;    // 새로운 위치
-        transform.position = newPosition;    // 새로운 위치로 갱신
+
 
         // Time.deltaTime : 이전 프레임으로부터 현재 프레임까지 시간이 얼마나 흘렀는지.. 나타내는 값
         //                  = 1초 / fps 값과 비슷하다.
@@ -48,5 +56,25 @@ public class PlayerMove : MonoBehaviour
         // 컴퓨터 1 : 50fps : Update -> 초당 50 실행   -> 10 * 50 = 500    * Time.deltaTime (두 개의 값을 같아지게 하는 수)
         // 컴퓨터 2 : 100fps : Update -> 초당 100 실행 -> 10 * 100 = 1000  * Time.deltaTime
 
+        // 포지션 값에 제한을 준다.
+        // 맨 마지막에 있는 newPosition 값을 갱신하는 함수가 아래 식 위에 있어서 처음에 의도대로 움직여지지 않았다,ㅁ
+        if (newPosition.x >= MaxX)
+        {
+            newPosition.x = MaxX;
+        }
+        else if (newPosition.x <= MinX)
+        {
+            newPosition.x = MinX;
+        }
+
+        if (newPosition.y >= MaxY)
+        {
+            newPosition.y = MaxY;
+        }
+        else if (newPosition.y <= MinY)
+        {
+            newPosition.y = MinY;
+        }
+        transform.position = newPosition;    // 새로운 위치로 갱신
     }
 }
