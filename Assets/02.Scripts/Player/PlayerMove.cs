@@ -1,12 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 // 플레이어 이동
 public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
     public float Speed = 0.2f;
-    public float Exeleration = 0.05f;
-    public float MaxSpeed = 0.5f;
-    public float MinSpeed = 0.1f;
+    public float MaxSpeed = 15f;
+    public float MinSpeed = 1f;
+    public float SpeedAmount = 0.05f;
+    public float ShiftSpeed = 1.2f; // 원래 속도에 곱할 수
     [Header("이동 범위")]   
     public float MaxX = 2.25f;
     public float MinX = -2.25f;
@@ -39,6 +41,7 @@ public class PlayerMove : MonoBehaviour
         // 2. 입력으로부터 방향을 구한다.
         // 벡터 : 크기와 방향을 표현하는 물리 개념
         Vector2 direction = new Vector2(h, v);
+        direction.Normalize(); // 방향 벡터를 정규화(크기를 1로 맞춤)
 
         Debug.Log($"direction : {direction.x}, {direction.y}");
 
@@ -46,6 +49,42 @@ public class PlayerMove : MonoBehaviour
         Vector2 position = transform.position; // 현재 위치
         // 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
         // 새로운 위치 = 현재 위치 + 속도 * 시간 // 속도 = 방향 * 속력
+
+        // Q,E 풀다운 시 Speed 에 SpeedAmount 값을 더하거나 빼준다.
+        // 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Speed += SpeedAmount;
+
+            if (Speed >= MaxSpeed)
+            {
+                Speed = MaxSpeed;
+            }
+        }
+
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            Speed -= SpeedAmount;
+
+            if (Speed <= MinSpeed)
+            {
+                Speed = MinSpeed;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Speed = ShiftSpeed * Speed;
+            
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            Speed = Speed / ShiftSpeed;
+        }
+
+
+
 
         //       새로운위치    현재 위치     방향
         Vector2 newPosition = position + direction * Speed * Time.deltaTime;    // 새로운 위치
@@ -79,4 +118,8 @@ public class PlayerMove : MonoBehaviour
         }
         transform.position = newPosition;    // 새로운 위치로 갱신
     }
+
+
+    // tranlate 방식 이동
+    // mathf 방식으로 이동제한, 속도 조절까지 가능 하다 한번씩 해볼 것
 }
