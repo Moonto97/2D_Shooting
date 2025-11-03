@@ -2,10 +2,12 @@ using UnityEngine;
 // 플레이어 이동
 public class PlayerMove : MonoBehaviour
 {
+    [Header("능력치")]
     public float Speed = 0.2f;
     public float Exeleration = 0.05f;
     public float MaxSpeed = 0.5f;
     public float MinSpeed = 0.1f;
+    [Header("이동 범위")]
     public float MaxX = 2.25f;
     public float MinX = -2.25f;
     public float MaxY = 5f;
@@ -60,20 +62,20 @@ public class PlayerMove : MonoBehaviour
         // 맨 마지막에 있는 newPosition 값을 갱신하는 함수가 아래 식 위에 있어서 처음에 의도대로 움직여지지 않았다,ㅁ
         if (newPosition.x >= MaxX)
         {
-            newPosition.x = MaxX;
+            newPosition.x = MinX;
         }
         else if (newPosition.x <= MinX)
         {
-            newPosition.x = MinX;
+            newPosition.x = MaxX;
         }
 
         if (newPosition.y >= MaxY)
         {
-            newPosition.y = MaxY;
+            newPosition.y = MinY;
         }
         else if (newPosition.y <= MinY)
         {
-            newPosition.y = MinY;
+            newPosition.y = MaxY;
         }
         transform.position = newPosition;    // 새로운 위치로 갱신
     }
