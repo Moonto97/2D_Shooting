@@ -49,17 +49,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("충돌 시작함");
         if (!other.CompareTag ("Enemy")) return;
 
-        GameObject enemyGameObject = other.gameObject;
+        Enemy enemy = other.GetComponent<Enemy>();  // 충돌한 상대방 오브젝트의 Enemy 컴포넌트를 가져온다.
+        enemy.Hit(BulletDamage);  // 상대방 오브젝트의 Hit 메서드를 호출하면서 데미지 값을 전달한다.
+
+
         // GetComponent 는 게임 오브젝트에 붙어있는 컴포넌트를 가져올 수 있다.
-        Enemy enemy = enemyGameObject.GetComponent<Enemy>();
 
 
         Destroy(this.gameObject);   // this.gameObject 이 스크립트를 가지고 있는 오브젝트를 뜻함
-        Destroy(other.gameObject);  // other 는 충돌한 상대방 오브젝트
-
+        
         
         // 객체 간의 상호작용을 할 때 묻지말고 시켜라.
     }

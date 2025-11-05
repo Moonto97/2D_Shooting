@@ -14,36 +14,41 @@ public class PlayerFire : MonoBehaviour
     public float FireInterval = 0.5f;
     public float CoolTime = 0.6f;
     public float Timer = 0f;
-    
+
+    private bool AutoMode = false;
+
 
     private void Update()
     {
         Timer += Time.deltaTime;
         
 
-        // 자동 발사 미완성**
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            if (Timer >= CoolTime)
-            {
-                Fire();
-                Timer = 0f;
-            }
-        }
-
-
         // 수동 발사
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
-
             if (Timer >= CoolTime)
             {
                 Fire();
-                Timer = 0f;
             }
-
         }
 
+
+        // 자동 발사
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            AutoMode = true;
+            if (Timer >= CoolTime)
+            {  Fire(); 
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AutoMode = false;
+            if (Timer >= CoolTime)
+            {
+                Fire();
+            }
+        }
 
 
 
@@ -51,7 +56,7 @@ public class PlayerFire : MonoBehaviour
 
     private void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || AutoMode)
         {
             // 2. 프리팹으로부터 게임 오버젝트를 생성한다.
             // 유니티에서 게임 오브젝트를 생성할 때는 new가 아니라 Instantiate 라는 메서드를 이용한다.
@@ -66,9 +71,10 @@ public class PlayerFire : MonoBehaviour
             GameObject bullet3 = Instantiate(bulletPrefab);
             bullet3.transform.position = FirePosition.position + new Vector3(FireInterval, 0f, 0f);
 
-
-
+            Timer = 0f;
 
         }
+
+
     }
 }
