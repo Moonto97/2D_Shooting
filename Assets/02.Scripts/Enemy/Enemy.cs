@@ -4,7 +4,7 @@ using UnityEngine;
 public enum EEnemyType
 {
     Directional, // 0
-    Trace        //
+    Trace        // 1
 }
 
 

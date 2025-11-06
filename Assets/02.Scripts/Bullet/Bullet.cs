@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour
 
         Enemy enemy = other.GetComponent<Enemy>();  // 충돌한 상대방 오브젝트의 Enemy 컴포넌트를 가져온다.
         enemy.Hit(BulletDamage);  // 상대방 오브젝트의 Hit 메서드를 호출하면서 데미지 값을 전달한다.
-
+        
 
         // GetComponent 는 게임 오브젝트에 붙어있는 컴포넌트를 가져올 수 있다.
 
