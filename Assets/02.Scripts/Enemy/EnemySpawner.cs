@@ -5,6 +5,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject EnemyPrefab;
     private float _timer;
     private float randomCoolTime = 1;
+    public float CoolTimeMax;
+    public float CoolTimeMin;
 
     public void Start()
     {
@@ -23,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
             //3. 적 생성
             GameObject enemy = Instantiate(EnemyPrefab);
             enemy.transform.position = transform.position;
-            randomCoolTime = Random.Range(1f, 5f);
+            randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
         }
         
 
