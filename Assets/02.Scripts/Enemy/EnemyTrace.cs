@@ -2,14 +2,22 @@ using UnityEngine;
 
 public class EnemyTrace : MonoBehaviour
 {
-    [Header("이동")]
-    public float MoveSpeed = 4f;
-    
+    [Header("스텟")]
+    float MoveSpeed = 2f;
+    private float _health = 100f;
+    public float EnemyDamage = 1f;
+    GameObject playerObject;
+
+    private void Start()
+    {
+          // 캐싱 : 자주 쓰는 데이터를 미리 가까운 곳에 저장해두고 참조하는 것.
+    }
+
 
     void Update()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        Vector2 playerPosition = player.transform.position;
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        Vector2 playerPosition = playerObject.transform.position;
 
         Vector2 enemyPosition = transform.position;
         Vector2 enemyDirection = (playerPosition - enemyPosition).normalized;
@@ -25,10 +33,23 @@ public class EnemyTrace : MonoBehaviour
 
         
 
+    }
 
+    public void Hit(float damage)
+    {
+        _health -= damage;
+        if (_health <= 0f)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.gameObject.CompareTag("Player")) return;
 
-
+        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+        playerHealth.Hit(EnemyDamage);    // 플레이어의 Hit 메서드를 호출하고 데미지 값을 전달한다.
 
     }
 }
