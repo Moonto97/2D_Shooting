@@ -17,7 +17,7 @@ public class PlayerFire : MonoBehaviour
     public float CoolTime = 0.6f;
     public float Timer = 0f;
 
-    private bool AutoMode = false;
+    private bool _autoMode = false;
 
 
     private void Update()
@@ -35,12 +35,12 @@ public class PlayerFire : MonoBehaviour
         // Alpha2 키 입력이 거의 먹히지 않는 것임.
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AutoMode = true;
+            _autoMode = true;
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            AutoMode = false;
+            _autoMode = false;
 
         }
 
@@ -56,7 +56,7 @@ public class PlayerFire : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.Space) || AutoMode)
+        if (Input.GetKey(KeyCode.Space) || _autoMode)
         {
             // 2. 프리팹으로부터 게임 오버젝트를 생성한다.
             // 유니티에서 게임 오브젝트를 생성할 때는 new가 아니라 Instantiate 라는 메서드를 이용한다.

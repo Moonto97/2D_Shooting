@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health;
+    public float Health;
    
     void Start()
     {
-        health = 3f;
+        Health = 3f;
     }
 
 
     void Update()
     {
-        if (health <= 0f)
+        if (Health <= 0f)
         {
             
             Destroy(this.gameObject);
@@ -33,12 +33,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void Hit(float damage)
     {
-        health -= damage;
+        Health -= damage;
     }
 
     public void Heal(float amount)
     {
-        health += amount;
+        Health += amount;
     }
 
 

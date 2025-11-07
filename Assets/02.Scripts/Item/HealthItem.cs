@@ -3,6 +3,8 @@ using UnityEngine;
 public class HealthItem : MonoBehaviour
 {
     public float HealAmount = 1f;
+    private float _time;
+    private float _startTrace = 2f;
     void Start()
     {
         
@@ -22,8 +24,4 @@ public class HealthItem : MonoBehaviour
 
     }
 
-    private void Spawn()
-    {
-        Instantiate(this.gameObject);
-    }
 }
