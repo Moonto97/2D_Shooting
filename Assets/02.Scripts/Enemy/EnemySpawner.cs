@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
         if (_timer >= randomCoolTime)
         {
             _timer = 0f;
+            randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
             //3. 적 생성
             if (UnityEngine.Random.Range(0, 100) > 70)
             {
