@@ -4,7 +4,9 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
-    public float Speed = 0.2f;
+    private float _speed = 5f;
+
+
     
     public float SpeedAmount = 0.05f;
     public float ShiftSpeed = 1.2f; // 원래 속도에 곱할 수
@@ -54,13 +56,13 @@ public class PlayerMove : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Speed = ShiftSpeed * Speed;
+            _speed = ShiftSpeed * _speed;
             
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            Speed = Speed / ShiftSpeed;
+            _speed = _speed / ShiftSpeed;
         }
 
 
@@ -69,7 +71,7 @@ public class PlayerMove : MonoBehaviour
 
 
         //       새로운위치    현재 위치     방향
-        Vector2 newPosition = position + direction * Speed * Time.deltaTime;    // 새로운 위치
+        Vector2 newPosition = position + direction * _speed * Time.deltaTime;    // 새로운 위치
 
 
         // Time.deltaTime : 이전 프레임으로부터 현재 프레임까지 시간이 얼마나 흘렀는지.. 나타내는 값
@@ -105,4 +107,9 @@ public class PlayerMove : MonoBehaviour
 
     // tranlate 방식 이동
     // mathf 방식으로 이동제한, 속도 조절까지 가능 하다 한번씩 해볼 것
+
+    public void SpeedUp(float value)
+    {
+        _speed += value;
+    }
 }

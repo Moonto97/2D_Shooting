@@ -36,6 +36,10 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
     }
 
+    public void Heal(float amount)
+    {
+        health += amount;
+    }
 
 
 }
