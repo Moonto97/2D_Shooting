@@ -5,11 +5,8 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
     private float _speed = 5f;
-
-
-    
-    public float SpeedAmount = 0.05f;
     public float ShiftSpeed = 1.2f; // 원래 속도에 곱할 수
+
     [Header("이동 범위")]   
     public float MaxX = 2.25f;
     public float MinX = -2.25f;

@@ -12,16 +12,20 @@ public class PlayerFire : MonoBehaviour
     public GameObject rightSubBulletPrefab;
     [Header("총구")]
     public Transform FirePosition;
-    
-    public float FireInterval = 0.5f;
-    public float CoolTime = 0.6f;
-    public float Timer = 0f;
+    [Header("발사 옵션")]
+    public float FireInterval = 0.5f;   // 총알 간 간격
+    public float CoolTime = 0.6f;   // 총알 발사 후 쿨타임
+    public float MaxCoolTime = 0.2f;
+    private float _timer = 0f;
 
     private bool _autoMode = false;
 
 
     private void Update()
     {
+
+
+
         // 자동 발사    *** 처음에는 아래 코드를 if(Timer <= 0f)문 아래에 넣었었는데 
         // 발사가 시작된 후에 멈추는 Alpha2 키 입력이 먹히지 않았음.
 
@@ -45,9 +49,9 @@ public class PlayerFire : MonoBehaviour
         }
 
 
-        Timer -= Time.deltaTime;
+        _timer -= Time.deltaTime;
         // 타이머가 계속 줄어들고, 0 이하일 때만 밑의 코드 실행(발사)
-        if (Timer >= 0f)
+        if (_timer >= 0f)
         {
             return;
         }
@@ -76,7 +80,7 @@ public class PlayerFire : MonoBehaviour
             GameObject subBullet2 = Instantiate(rightSubBulletPrefab);   
             subBullet2.transform.position = FirePosition.position + new Vector3(FireInterval * 2f, 0f, 0f);
 
-            Timer = CoolTime;
+            _timer = CoolTime;
 
         }
 
@@ -85,6 +89,10 @@ public class PlayerFire : MonoBehaviour
     public void PowerUp (float power)
     {
         CoolTime -= power;
+        if (CoolTime <= MaxCoolTime)
+        {
+            CoolTime = MaxCoolTime;
+        }
     }
 
     
