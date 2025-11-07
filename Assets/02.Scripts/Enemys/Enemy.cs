@@ -22,10 +22,11 @@ public class Enemy : MonoBehaviour
     public GameObject HealthItemPrefab;
     public GameObject FireRateItemPrefab;
     public GameObject MoveSpeedItemPrefab;
-    private int HealthDropRate = 70;
-    private int MoveSpeedDropRate = 20;
-    private int FireRateDropRate = 10;
+    private int _healthDropRate = 70;
+    private int _moveSpeedDropRate = 20;
+    private int _fireRateDropRate = 10;
 
+    [Header("템드랍율")]
     public float EnemyDropRate = 50f;
 
     private void Update()
@@ -80,10 +81,9 @@ public class Enemy : MonoBehaviour
             int randomNumber = Random.Range(1, 100);
             if (randomNumber <= EnemyDropRate)
             {
-                DropItem(Random.Range(1, HealthDropRate + MoveSpeedDropRate + FireRateDropRate));
+                DropItem(Random.Range(1, _healthDropRate + _moveSpeedDropRate + _fireRateDropRate));
             }
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -98,12 +98,12 @@ public class Enemy : MonoBehaviour
     // 죽을 때 아이템 드랍
     private void DropItem(int randomDrop)
     {
-        if (randomDrop <= HealthDropRate)
+        if (randomDrop <= _healthDropRate)
         {
             GameObject healthItem = Instantiate(HealthItemPrefab);
             healthItem.transform.position = transform.position;
         }
-        else if (randomDrop <= HealthDropRate + MoveSpeedDropRate)
+        else if (randomDrop <= _healthDropRate + _moveSpeedDropRate)
         {
             GameObject moveSpeedItem = Instantiate(MoveSpeedItemPrefab);
             moveSpeedItem.transform.position = transform.position;
