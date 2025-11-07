@@ -167,3 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealAmount: 1
+  TraceSpeed: 4

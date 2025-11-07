@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
 
     Vector2 enemyDirection = (playerPosition - enemyPosition).normalized;
     transform.Translate(enemyDirection* MoveSpeed * Time.deltaTime);
-}
+    }
     
 
     public void Hit(float damage)
