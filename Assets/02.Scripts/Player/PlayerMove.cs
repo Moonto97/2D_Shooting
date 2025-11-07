@@ -5,8 +5,7 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
     public float Speed = 0.2f;
-    public float MaxSpeed = 15f;
-    public float MinSpeed = 1f;
+    
     public float SpeedAmount = 0.05f;
     public float ShiftSpeed = 1.2f; // 원래 속도에 곱할 수
     [Header("이동 범위")]   
@@ -51,25 +50,7 @@ public class PlayerMove : MonoBehaviour
 
         // Q,E 풀다운 시 Speed 에 SpeedAmount 값을 더하거나 빼준다.
         // 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Speed += SpeedAmount;
-
-            if (Speed >= MaxSpeed)
-            {
-                Speed = MaxSpeed;
-            }
-        }
-
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            Speed -= SpeedAmount;
-
-            if (Speed <= MinSpeed)
-            {
-                Speed = MinSpeed;
-            }
-        }
+        
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
