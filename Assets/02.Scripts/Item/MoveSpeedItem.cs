@@ -29,7 +29,6 @@ public class MoveSpeedItem : MonoBehaviour
         PlayerMove playerMove = other.gameObject.GetComponent<PlayerMove>();
         playerMove.SpeedUp(SpeedBoostAmount);
         Destroy(this.gameObject);
-
     }
 
     private void MoveTrace()    // 추격 이동 타입

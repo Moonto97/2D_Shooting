@@ -2,21 +2,28 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float Health;
+    public float Health = 3f;
+    public float MaxHealth = 3f;
    
     void Start()
     {
         Health = 3f;
+        MaxHealth = 3f;
     }
 
 
     void Update()
     {
+
+        Health = Mathf.Min(Health, MaxHealth);
+
         if (Health <= 0f)
         {
-            
             Destroy(this.gameObject);
         }
+
+       
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

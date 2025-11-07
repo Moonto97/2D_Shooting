@@ -6,11 +6,7 @@ public class HealthItem : MonoBehaviour
     private float _time;
     private float _startTrace = 2f;
     public float TraceSpeed = 4f;
-    void Start()
-    {
-        
-    }
-
+    
     void Update()
     {
         _time += Time.deltaTime;
@@ -26,7 +22,6 @@ public class HealthItem : MonoBehaviour
         PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
         playerHealth.Heal(HealAmount);
         Destroy(this.gameObject);
-
     }
 
     private void MoveTrace()    // 추격 이동 타입
