@@ -167,4 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   EnemyDamage: 1
-  Type: Directional
+  Type: 0
+  HealthItemPrefab: {fileID: 2895582988680436376, guid: 45cf2d1b04b491d4da01e7493f52e1d2, type: 3}
+  FireRateItemPrefab: {fileID: 4380532193067156299, guid: 341280fa7debfeb46a25cd326e39733f, type: 3}
+  MoveSpeedItemPrefab: {fileID: 23516748427535373, guid: d0d09284649a08a41b00835485e49aaa, type: 3}
+  EnemyDropRate: 50

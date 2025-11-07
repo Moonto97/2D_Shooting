@@ -47,5 +47,5 @@ MonoBehaviour:
   EnemyPrefabs:
   - {fileID: 7274530723037655602, guid: 891b78e3e327b4f40861685758adb258, type: 3}
   - {fileID: 7274530723037655602, guid: 497a6736dfe6aed44927b7391ee75d87, type: 3}
-  CoolTimeMax: 3
+  CoolTimeMax: 2
   CoolTimeMin: 1

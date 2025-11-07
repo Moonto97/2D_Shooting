@@ -17,6 +17,17 @@ public class Enemy : MonoBehaviour
 
     [Header("적 타입")]
     public EEnemyType Type;
+
+    [Header("아이템")]
+    public GameObject HealthItemPrefab;
+    public GameObject FireRateItemPrefab;
+    public GameObject MoveSpeedItemPrefab;
+    private int HealthDropRate = 70;
+    private int MoveSpeedDropRate = 20;
+    private int FireRateDropRate = 10;
+
+    public float EnemyDropRate = 50f;
+
     private void Update()
     {
 
@@ -43,13 +54,13 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void MoveDirectional()
+    private void MoveDirectional() // 직선 이동 타입
     {
         Vector2 direction = Vector2.down.normalized; // ==new Vector2(0, -1);
         transform.Translate(direction * MoveSpeed * Time.deltaTime);
     }
 
-    private void MoveTrace()
+    private void MoveTrace()    // 추격 이동 타입
     {
     GameObject playerObject = GameObject.FindWithTag("Player");
     Vector2 playerPosition = playerObject.transform.position;
@@ -66,7 +77,13 @@ public class Enemy : MonoBehaviour
         if (_health <= 0f)
         {
             Destroy(this.gameObject);
+            int randomNumber = Random.Range(1, 100);
+            if (randomNumber <= EnemyDropRate)
+            {
+                DropItem(Random.Range(1, HealthDropRate + MoveSpeedDropRate + FireRateDropRate));
+            }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -78,6 +95,25 @@ public class Enemy : MonoBehaviour
 
     }
 
+    // 죽을 때 아이템 드랍
+    private void DropItem(int randomDrop)
+    {
+        if (randomDrop <= HealthDropRate)
+        {
+            GameObject healthItem = Instantiate(HealthItemPrefab);
+            healthItem.transform.position = transform.position;
+        }
+        else if (randomDrop <= HealthDropRate + MoveSpeedDropRate)
+        {
+            GameObject moveSpeedItem = Instantiate(MoveSpeedItemPrefab);
+            moveSpeedItem.transform.position = transform.position;
+        }
+        else
+        {
+            GameObject fireRateItem = Instantiate(FireRateItemPrefab);
+            fireRateItem.transform.position = transform.position;
+        }
 
+    }
 
 }

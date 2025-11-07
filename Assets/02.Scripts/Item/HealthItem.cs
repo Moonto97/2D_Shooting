@@ -21,4 +21,9 @@ public class HealthItem : MonoBehaviour
         Destroy(this.gameObject);
 
     }
+
+    private void Spawn()
+    {
+        Instantiate(this.gameObject);
+    }
 }
