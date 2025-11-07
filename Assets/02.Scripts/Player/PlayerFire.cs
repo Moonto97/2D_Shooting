@@ -82,6 +82,11 @@ public class PlayerFire : MonoBehaviour
 
     }
 
+    public void PowerUp (float power)
+    {
+        CoolTime -= power;
+    }
+
     
 
 }
