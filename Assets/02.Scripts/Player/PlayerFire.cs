@@ -15,7 +15,7 @@ public class PlayerFire : MonoBehaviour
     [Header("발사 옵션")]
     public float FireInterval = 0.5f;   // 총알 간 간격
     public float CoolTime = 0.6f;   // 총알 발사 후 쿨타임
-    public float MaxCoolTime = 0.2f;
+    public float MaxCoolTime = 0.3f;
     private float _timer = 0f;
 
     private bool _autoMode = false;

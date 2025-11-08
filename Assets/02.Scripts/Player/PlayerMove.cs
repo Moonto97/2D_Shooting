@@ -1,5 +1,8 @@
+using JetBrains.Annotations;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 // 플레이어 이동
 public class PlayerMove : MonoBehaviour
 {
@@ -14,16 +17,16 @@ public class PlayerMove : MonoBehaviour
     public float MaxY = 5f;
     public float MinY = -5f;
 
+    private int _enemyNumber;
+    
+    public float DodgeLimit = 1.5f;
+    public float DodgeAmount = 1f;
+    
+
 
     private void Start()
     {
-        // 목표
-        // 키보드 입력에 따라 방향을 구하고, 그 방향으로 이동시키고 싶다.
-
-        // 구현 순서
-        // 1. 키보드 입력
-        // 2. 방향 구하는 방법
-        // 3. 이동
+       
 
     }
 
@@ -48,8 +51,7 @@ public class PlayerMove : MonoBehaviour
         // 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
         // 새로운 위치 = 현재 위치 + 속도 * 시간 // 속도 = 방향 * 속력
 
-        // Q,E 풀다운 시 Speed 에 SpeedAmount 값을 더하거나 빼준다.
-        // 
+        
         
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
@@ -83,11 +85,11 @@ public class PlayerMove : MonoBehaviour
         // 맨 마지막에 있는 newPosition 값을 갱신하는 함수가 아래 식 위에 있어서 처음에 의도대로 움직여지지 않았다.
         if (newPosition.x >= MaxX)
         {
-            newPosition.x = MinX;
+            newPosition.x = MaxX;
         }
         else if (newPosition.x <= MinX)
         {
-            newPosition.x = MaxX;
+            newPosition.x = MinX;
         }
 
         if (newPosition.y >= MaxY)
@@ -99,6 +101,12 @@ public class PlayerMove : MonoBehaviour
             newPosition.y = MinY;
         }
         transform.position = newPosition;    // 새로운 위치로 갱신
+
+
+
+
+        
+        
     }
 
 
@@ -114,4 +122,39 @@ public class PlayerMove : MonoBehaviour
             Speed = MaxSpeed;
         }
     }
+
+    public void AutoMove()
+    {
+        // 적이 스폰될 때마다 배열한다.--> 업데이트때 마다 배열을 계속 찾는데 뭔가 배열값을 못찾아서 오류가 난다.
+        GameObject[] EnemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        if (EnemyObjects.Length == 0) return;
+        Vector2 enemyVector = EnemyObjects[_enemyNumber].transform.position;
+        Vector2 playerVector = transform.position;
+        Vector2 distance = playerVector - enemyVector;
+
+        // 
+        Vector2 DodgeVector = new Vector2(DodgeAmount, 0);
+
+        if(distance.magnitude < DodgeLimit)
+        {
+            Vector2 autoPosition = transform.position;
+            Vector2 newAutoPosition = autoPosition + DodgeVector * Speed * Time.deltaTime;
+
+            transform.position = newAutoPosition;
+            
+        }
+        
+        
+
+        
+
+    }    
+
+    public void EnemyCounter(int takeCount) // 삭제할때는 EnemySpawner 의 관련코드도 지우자,,,
+    {
+        // EnemySpawner 에서 몇번째 적인지 번호를 받아왔다. (지역변수로.)
+        _enemyNumber = takeCount;
+
+    }
+
 }

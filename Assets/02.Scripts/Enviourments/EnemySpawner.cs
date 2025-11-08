@@ -11,6 +11,9 @@ public class EnemySpawner : MonoBehaviour
     public float CoolTimeMax = 3;
     public float CoolTimeMin = 1;
 
+    private int _counter = - 1;
+   
+
     public void Start()
     {
         
@@ -27,17 +30,25 @@ public class EnemySpawner : MonoBehaviour
             _timer = 0f;
             _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
             //3. 적 생성
-            if (UnityEngine.Random.Range(0, 100) > 70)
+            if (UnityEngine.Random.Range(0, 100) < 70)
             {
                 GameObject enemy = Instantiate(EnemyPrefabs[(int)EEnemyType.Directional]);  // (int)열거형 형변환 Enemy에 열거해놓은 EnemyType 에서 0번째인 Directional 을 가져옴
                 enemy.transform.position = transform.position;
                 _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
+
+                // 자동이동 관련 카운터
+                _counter++;
+                PlayerMove player = GetComponent<PlayerMove>();
+                player.EnemyCounter(_counter);
             }
             else
             {
                 GameObject enemy = Instantiate(EnemyPrefabs[(int)EEnemyType.Trace]);
                 enemy.transform.position = transform.position;
                 _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
+                _counter++;
+                PlayerMove player = GetComponent<PlayerMove>();
+                player.EnemyCounter(_counter);
             }
             
             
