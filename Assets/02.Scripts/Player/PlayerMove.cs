@@ -102,11 +102,10 @@ public class PlayerMove : MonoBehaviour
         }
         transform.position = newPosition;    // 새로운 위치로 갱신
 
-
-
-
         
         
+
+
     }
 
 
@@ -123,37 +122,36 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void AutoMove()
+    
+    public void EnemyCounter(int takeCount) // 삭제할때는 EnemySpawner 의 관련코드도 지우자,,,
+    {
+        // EnemySpawner 에서 몇번째 적인지 번호를 받아왔다. (지역변수로.)
+        _enemyNumber = takeCount;
+
+    }
+
+    void AutoMove()
     {
         // 적이 스폰될 때마다 배열한다.--> 업데이트때 마다 배열을 계속 찾는데 뭔가 배열값을 못찾아서 오류가 난다.
         GameObject[] EnemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
         if (EnemyObjects.Length == 0) return;
-        Vector2 enemyVector = EnemyObjects[_enemyNumber].transform.position;
+        Vector2 enemyVector = EnemyObjects[0].transform.position;
         Vector2 playerVector = transform.position;
         Vector2 distance = playerVector - enemyVector;
 
         // 
         Vector2 DodgeVector = new Vector2(DodgeAmount, 0);
 
-        if(distance.magnitude < DodgeLimit)
+
+        if (distance.magnitude < DodgeLimit)
         {
             Vector2 autoPosition = transform.position;
             Vector2 newAutoPosition = autoPosition + DodgeVector * Speed * Time.deltaTime;
 
             transform.position = newAutoPosition;
-            
+
         }
-        
-        
 
-        
-
-    }    
-
-    public void EnemyCounter(int takeCount) // 삭제할때는 EnemySpawner 의 관련코드도 지우자,,,
-    {
-        // EnemySpawner 에서 몇번째 적인지 번호를 받아왔다. (지역변수로.)
-        _enemyNumber = takeCount;
 
     }
 
