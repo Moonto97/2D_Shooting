@@ -63,12 +63,13 @@ public class Enemy : MonoBehaviour
 
     private void MoveTrace()    // 추격 이동 타입
     {
-    GameObject playerObject = GameObject.FindWithTag("Player");
-    Vector2 playerPosition = playerObject.transform.position;
-    Vector2 enemyPosition = transform.position;
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        Vector2 playerPosition = playerObject.transform.position;
+        Vector2 enemyPosition = transform.position;
 
-    Vector2 enemyDirection = (playerPosition - enemyPosition).normalized;
-    transform.Translate(enemyDirection* MoveSpeed * Time.deltaTime);
+        Vector2 enemyDirection = (playerPosition - enemyPosition).normalized;
+        transform.Translate(enemyDirection* MoveSpeed * Time.deltaTime);
+
     }
     
     

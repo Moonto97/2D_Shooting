@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     public float CoolTimeMax = 3;
     public float CoolTimeMin = 1;
 
-    private int _counter = - 1;
+    
    
 
     public void Start()
@@ -36,19 +36,14 @@ public class EnemySpawner : MonoBehaviour
                 enemy.transform.position = transform.position;
                 _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
 
-                // 자동이동 관련 카운터
-                _counter++;
-                PlayerMove player = GetComponent<PlayerMove>();
-                player.EnemyCounter(_counter);
+                
             }
             else
             {
                 GameObject enemy = Instantiate(EnemyPrefabs[(int)EEnemyType.Trace]);
                 enemy.transform.position = transform.position;
                 _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
-                _counter++;
-                PlayerMove player = GetComponent<PlayerMove>();
-                player.EnemyCounter(_counter);
+               
             }
             
             
