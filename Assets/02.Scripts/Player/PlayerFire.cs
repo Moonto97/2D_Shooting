@@ -66,14 +66,13 @@ public class PlayerFire : MonoBehaviour
             // 유니티에서 게임 오브젝트를 생성할 때는 new가 아니라 Instantiate 라는 메서드를 이용한다.
             // 클래스 -> 객체(속성 + 기능) -> 메모리에 로드된 객체를 인스턴스라 한다.
             //                                인스턴스화 한다는 의미
-            GameObject bullet1 = Instantiate(bulletPrefab); // 3. 총알 위치를 총구 위치로 바꾼다.
-            bullet1.transform.position = FirePosition.position;
+            
+
+            GameObject bullet1 = Instantiate(bulletPrefab);
+            bullet1.transform.position = FirePosition.position + new Vector3(-FireInterval, 0f, 0f);
 
             GameObject bullet2 = Instantiate(bulletPrefab);
-            bullet2.transform.position = FirePosition.position + new Vector3(-FireInterval, 0f, 0f);
-
-            GameObject bullet3 = Instantiate(bulletPrefab);
-            bullet3.transform.position = FirePosition.position + new Vector3(FireInterval, 0f, 0f);
+            bullet2.transform.position = FirePosition.position + new Vector3(FireInterval, 0f, 0f);
 
             GameObject subBullet1 = Instantiate(leftSubBulletPrefab);
             subBullet1.transform.position = FirePosition.position + new Vector3(-FireInterval * 2f, 0f, 0f);

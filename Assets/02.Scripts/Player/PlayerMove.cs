@@ -1,13 +1,8 @@
-using JetBrains.Annotations;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 // 플레이어 이동
 public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
-    public float Speed = 5f;
     public float ShiftSpeed = 1.2f; // 원래 속도에 곱할 수
     public float MaxSpeed = 10f;
 
@@ -17,51 +12,43 @@ public class PlayerMove : MonoBehaviour
     public float MaxY = 5f;
     public float MinY = -5f;
 
-    private int _enemyNumber;
-    
-    public float DodgeLimit = 1.5f;
-    public float DodgeAmount = 1f;
-    
-    Vector2 Distance;
-    Vector2 traceDirection;
-
-
-
+    private  Animator _animator;
+    private Player _player;
 
     private void Start()
     {
-       
+
+        _animator = GetComponent<Animator>();
+        _player = GetComponent<Player>();
 
     }
 
 
-    public void Update()
+    public void Execute()
     {
-        
         // 입력 받음
-        float h = Input.GetAxis("Horizontal");  
-        float v = Input.GetAxis("Vertical");   
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(h, v);
-        direction.Normalize(); 
-        Vector2 position = transform.position; 
+        direction.Normalize();
+        Vector2 position = transform.position;
+
+        //if (direction.x > 0) _animator.Play("Right");
+        //if (direction.x < 0) _animator.Play("Left");
+        //if (direction.x == 0) _animator.Play("Idle");
+        // 이 방식의 단점은 Transition, Timing, State 가 무시되고, 남용하기 쉬워서 어디서 애니메이션을 수정하는지 알 수 없어지게 된다.
+
+        // 두번째 방식
+        _animator.SetInteger("x", (int) direction.x);
+
+
+
+
         
-
-        
-        
-        // 스피드업
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Speed = ShiftSpeed * Speed;
-            
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            Speed = Speed / ShiftSpeed;
-        }
+        float speed = _player.Speed;
 
 
-        Vector2 newPosition = position + direction * Speed * Time.deltaTime;    // 새로운 위치
+        Vector2 newPosition = position + direction * speed * Time.deltaTime;    // 새로운 위치
 
         // 포지션 제한
         if (newPosition.x >= MaxX)
@@ -87,10 +74,12 @@ public class PlayerMove : MonoBehaviour
     }
     public void SpeedUp(float value)
     {
-        Speed += value;
-        if (Speed >= MaxSpeed)
+        float speed = _player.Speed;
+        speed += value;
+
+        if (speed >= MaxSpeed)
         {
-            Speed = MaxSpeed;
+            _player.Speed = MaxSpeed;
         }
     }
 
