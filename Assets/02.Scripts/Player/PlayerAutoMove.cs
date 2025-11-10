@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class PlayerAutoMove : MonoBehaviour
 {
     private Player _player;
+    private float DetectingZoneSize = 2;
     private void Start()
     { 
         _player = GetComponent<Player>();
@@ -30,21 +31,25 @@ public class PlayerAutoMove : MonoBehaviour
         }
         closestVector = closestEnemy.transform.position;
 
+        if (closestDistance < DetectingZoneSize)
+        {
+            // 3. 왼쪽이면 왼쪽
+            Vector2 playerPosition = transform.position;
+            Vector2 direction = Vector2.zero;
+            if (closestVector.x < playerPosition.x)
+            {
+                direction.x = -1;
+            }
+            // 4. 오른쪽이면 오른쪽
+            else if (closestVector.x > playerPosition.x)
+            {
+                direction.x = 1;
+            }
+            // 5. 위 로직에 따라 이동.
+            transform.Translate(direction * _player.Speed * Time.deltaTime);
+        }
 
-        // 3. 왼쪽이면 왼쪽
-        Vector2 playerPosition = transform.position;
-        Vector2 direction = Vector2.zero;
-        if(closestVector.x < playerPosition.x)
-        {
-            direction.x = -1;
-        }
-        // 4. 오른쪽이면 오른쪽
-        if(closestVector.x > playerPosition.x)
-        {
-            direction.x = 1;
-        }
-        // 5. 적이 없다면 원점으로 이동
         
-        
+
     }
 }

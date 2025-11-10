@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
 
     private  Animator _animator;
     private Player _player;
+    
 
     private void Start()
     {
