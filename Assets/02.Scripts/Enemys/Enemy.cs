@@ -93,6 +93,9 @@ public class Enemy : MonoBehaviour
                 DropItem(Random.Range(1, _healthDropRate + _moveSpeedDropRate + _fireRateDropRate));
             }
         }
+
+        // 만약 헬스값이 "변화"하면 Idle -> EnemyTHit, EnemyDHit 의 트리거가 되도록 한다.
+        // 트리거 발동 후 1초 지나면 다시 Idle로 돌아가도록 설정한다.
     }
 
     private void OnTriggerEnter2D(Collider2D other)
