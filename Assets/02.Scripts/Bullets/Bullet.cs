@@ -15,18 +15,19 @@ public class Bullet : MonoBehaviour
     [Header("데미지")]
     public float BulletDamage = 60f;
 
-    Animator _animator;
+    
 
     void Start()
     {
         _speed = StartSpeed;
-        _animator = GetComponent<Animator>();
+        
         
     }
 
     
     void Update()
     {
+        
         float acceleration = (TargetSpeed - StartSpeed) / TargetTime; // 가속도 = (목표 속력 - 초기 속력) / 목표속력 달성까지 걸린 시간
         _speed += Time.deltaTime * acceleration;   // Time.deltaTime 시간 기반의 정확한 변화량 계산기라고 생각하면 편하다.
         _speed = Mathf.Min(_speed, TargetSpeed); // _speed 가 TargetSpeed 보다 커지면 TargetSpeed 로 고정
