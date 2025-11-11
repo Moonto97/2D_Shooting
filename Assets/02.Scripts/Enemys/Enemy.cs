@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 // Enum : 열거형 : 기억하기 어려운 상수들을 기억하기 쉬운 이름 하나로 묶어 관리하는 표현 방식
@@ -29,6 +30,17 @@ public class Enemy : MonoBehaviour
     [Header("템드랍율")]
     public float EnemyDropRate = 50f;
 
+    [Header("폭발이펙트프리펩")]
+    public GameObject ExplosionPrefab;
+
+    [Header("애니메이터")]
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
 
@@ -51,6 +63,8 @@ public class Enemy : MonoBehaviour
         // 2. 쪼개고 나니까 똑같은 기능/속성이 있네 -> 상속
         // 상속을 하자니 하는 일이 너무 많고, ---> 조합
         // 재현씨 코드가 강사님이 의도한 조합을 잘 이용한 케이스니 참고해보자 -> 슬렉 11.06 실습과제 댓글에 깃주소 있음.
+
+
             
 
     }
@@ -71,16 +85,20 @@ public class Enemy : MonoBehaviour
         transform.Translate(enemyDirection* MoveSpeed * Time.deltaTime);
 
     }
-    
-    
 
 
+
+    // 만약 헬스값이 "변화"하면 Idle -> EnemyTHit, EnemyDHit 의 트리거가 되도록 한다
+    // 트리거 발동 후 1초 지나면 다시 Idle로 돌아가도록 설정한다.
 
     public void Hit(float damage)
     {
         _health -= damage;
+        _animator.SetTrigger("Hit");  // 애니메이터에 Hit 트리거 실행
         if (_health <= 0f)
         {
+            MakeExplosionEffect();
+
             Destroy(this.gameObject);
             int randomNumber = Random.Range(1, 100);
             if (randomNumber <= EnemyDropRate)
@@ -88,7 +106,15 @@ public class Enemy : MonoBehaviour
                 DropItem(Random.Range(1, _healthDropRate + _moveSpeedDropRate + _fireRateDropRate));
             }
         }
+
+        IEnumerator IdleTimer()     // 1초 후 에니메이터에 Idle 트리거 실행
+        {
+            yield return new WaitForSeconds(1);
+            _animator.SetTrigger("Idle");  
+        }
     }
+
+   
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -118,6 +144,12 @@ public class Enemy : MonoBehaviour
             fireRateItem.transform.position = transform.position;
         }
 
+    }
+
+    private void MakeExplosionEffect()
+    {
+
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
     }
 
 }

@@ -12,10 +12,11 @@ public class LeftSubBullet : MonoBehaviour
     public float Angle = -0.25f;
     [Header("데미지")]
     public float BulletDamage = 40f;
-
+    private Animator _animator; 
     public void Start()
     {
         _speed = StartSpeed;
+        _animator = GetComponent<Animator>();
     }
 
     public void Update()
