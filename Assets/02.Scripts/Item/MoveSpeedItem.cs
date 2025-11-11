@@ -7,10 +7,12 @@ public class MoveSpeedItem : MonoBehaviour
     private float _time;
     private float _startTrace = 2f;
     public float TraceSpeed = 4f;
+    private Player _player;
+    public GameObject ConsumeEffect;
 
     void Start()
     {
-        
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     
@@ -29,6 +31,8 @@ public class MoveSpeedItem : MonoBehaviour
         PlayerMove playerMove = other.gameObject.GetComponent<PlayerMove>();
         playerMove.SpeedUp(SpeedBoostAmount);
         Destroy(this.gameObject);
+        float randomDegree = Random.Range(0, 359);
+        Instantiate(ConsumeEffect, _player.transform.position, Quaternion.Euler(0, 0, randomDegree));
     }
 
     private void MoveTrace()    // 추격 이동 타입

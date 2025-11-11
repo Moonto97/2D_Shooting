@@ -7,8 +7,11 @@ public class FireRateItem : MonoBehaviour
     private float _time;
     private float _startTrace = 2f;
     public float TraceSpeed = 4f;
+    public GameObject ConsumePrefab;
+    private Player _player;
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         
     }
 
@@ -27,7 +30,8 @@ public class FireRateItem : MonoBehaviour
         PlayerFire playerFire = other.gameObject.GetComponent<PlayerFire>();
         playerFire.PowerUp(ReduceCoolTime);
         Destroy(this.gameObject);
-
+        float randomDegree = UnityEngine.Random.Range(0, 360f);
+        Instantiate(ConsumePrefab, _player.transform.position , Quaternion.Euler(0, 0, randomDegree));
     }
 
     private void MoveTrace()    // 추격 이동 타입

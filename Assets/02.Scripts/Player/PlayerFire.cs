@@ -16,14 +16,29 @@ public class PlayerFire : MonoBehaviour
     public float FireInterval = 0.5f;   // 총알 간 간격
     public float CoolTime = 0.6f;   // 총알 발사 후 쿨타임
     public float MaxCoolTime = 0.3f;
-    private float _timer = 0f;
-
+    private float _fireTimer = 0f;
+    private Ultimate _ultimate;
     private bool _autoMode = false;
+    private float _ultimateTime = 0f;
+    private float _ultimateCoolTime = 3f;
+    
 
+    private void Start()
+    {
+        _ultimate = GetComponent<Ultimate>();
+    }
 
     private void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _ultimate.UltimateActivate();
+        }
+        _ultimateTime += Time.deltaTime;
+        if(_ultimateTime > _ultimateCoolTime)
+        {
+            _ultimate.UltimateDelete();
+        }
 
 
         // 자동 발사    *** 처음에는 아래 코드를 if(Timer <= 0f)문 아래에 넣었었는데 
@@ -49,9 +64,9 @@ public class PlayerFire : MonoBehaviour
         }
 
 
-        _timer -= Time.deltaTime;
+        _fireTimer -= Time.deltaTime;
         // 타이머가 계속 줄어들고, 0 이하일 때만 밑의 코드 실행(발사)
-        if (_timer >= 0f)
+        if (_fireTimer >= 0f)
         {
             return;
         }
@@ -79,7 +94,7 @@ public class PlayerFire : MonoBehaviour
             GameObject subBullet2 = Instantiate(rightSubBulletPrefab);   
             subBullet2.transform.position = FirePosition.position + new Vector3(FireInterval * 2f, 0f, 0f);
 
-            _timer = CoolTime;
+            _fireTimer = CoolTime;
 
         }
 

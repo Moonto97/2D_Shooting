@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedBoostAmount: 1
   TraceSpeed: 4
+  ConsumeEffect: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
 --- !u!95 &5804862097695229706
 Animator:
   serializedVersion: 7

@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealAmount: 1
   TraceSpeed: 4
+  ConsumeEffect: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
 --- !u!95 &-3957132866458550538
 Animator:
   serializedVersion: 7

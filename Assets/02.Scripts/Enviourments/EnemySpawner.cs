@@ -35,21 +35,14 @@ public class EnemySpawner : MonoBehaviour
                 GameObject enemy = Instantiate(EnemyPrefabs[(int)EEnemyType.Directional]);  // (int)열거형 형변환 Enemy에 열거해놓은 EnemyType 에서 0번째인 Directional 을 가져옴
                 enemy.transform.position = transform.position;
                 _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
-
-                
             }
             else
             {
                 GameObject enemy = Instantiate(EnemyPrefabs[(int)EEnemyType.Trace]);
                 enemy.transform.position = transform.position;
                 _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
-               
             }
-            
-            
         }
-        
-
     }
 
 

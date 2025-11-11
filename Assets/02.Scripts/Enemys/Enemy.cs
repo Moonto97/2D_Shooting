@@ -136,7 +136,6 @@ public class Enemy : MonoBehaviour
 
     private void MakeExplosionEffect()
     {
-
         Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
     }
 

@@ -129,7 +129,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.4}
+    oldSize: {x: 0.4, y: 0.2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReduceCoolTime: 0.1
   TraceSpeed: 4
+  ConsumePrefab: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
 --- !u!95 &-2082707740256473569
 Animator:
   serializedVersion: 7

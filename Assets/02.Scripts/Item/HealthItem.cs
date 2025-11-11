@@ -6,7 +6,14 @@ public class HealthItem : MonoBehaviour
     private float _time;
     private float _startTrace = 2f;
     public float TraceSpeed = 4f;
-    
+
+    private Player _player;
+    public GameObject ConsumeEffect;
+
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
     void Update()
     {
         _time += Time.deltaTime;
@@ -22,6 +29,8 @@ public class HealthItem : MonoBehaviour
         PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
         playerHealth.Heal(HealAmount);
         Destroy(this.gameObject);
+        float randomDegree = UnityEngine.Random.Range(0, 359);
+        Instantiate(ConsumeEffect, _player.transform.position, Quaternion.Euler(0,0, randomDegree));
     }
 
     private void MoveTrace()    // 추격 이동 타입
