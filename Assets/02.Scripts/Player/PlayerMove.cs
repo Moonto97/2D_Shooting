@@ -12,14 +12,15 @@ public class PlayerMove : MonoBehaviour
     public float MaxY = 5f;
     public float MinY = -5f;
 
-    private  Animator _animator;
+    
     private Player _player;
+    Animator _animator;
     
 
     private void Start()
     {
-
         _animator = GetComponent<Animator>();
+        
         _player = GetComponent<Player>();
 
     }

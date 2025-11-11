@@ -15,7 +15,14 @@ public class PlayerAutoMove : MonoBehaviour
     {
         // 1. 모든 적을 찾는다.
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies == null || enemies.Length == 0) return;
+
+
+        
+        if (enemies == null || enemies.Length == 0)
+        {
+            transform.Translate(-transform.position * _player.Speed * Time.deltaTime);
+            return;
+        }
         // 2. 가장 가까운 적을 찾는다.
         GameObject closestEnemy = enemies[0];
         Vector2 closestVector = closestEnemy.transform.position;
@@ -38,12 +45,12 @@ public class PlayerAutoMove : MonoBehaviour
             Vector2 direction = Vector2.zero;
             if (closestVector.x < playerPosition.x)
             {
-                direction.x = -1;
+                direction.x = 1;
             }
             // 4. 오른쪽이면 오른쪽
-            else if (closestVector.x > playerPosition.x)
+            if (closestVector.x > playerPosition.x)
             {
-                direction.x = 1;
+                direction.x = - 1;
             }
             // 5. 위 로직에 따라 이동.
             transform.Translate(direction * _player.Speed * Time.deltaTime);

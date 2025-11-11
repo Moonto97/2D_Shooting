@@ -6,9 +6,17 @@ public class Player : MonoBehaviour
 
     public bool AutoMode = false;
 
-    // Update is called once per frame
-    void Update()
+    
+
+    private void Start()
     {
+        
+    }
+
+    private void Update()
+    {
+
+
         if(AutoMode)
         {
             // 자동 모드

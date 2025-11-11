@@ -15,9 +15,12 @@ public class Bullet : MonoBehaviour
     [Header("데미지")]
     public float BulletDamage = 60f;
 
+    Animator _animator;
+
     void Start()
     {
         _speed = StartSpeed;
+        _animator = GetComponent<Animator>();
         
     }
 
