@@ -15,12 +15,14 @@ public class PlayerAutoMove : MonoBehaviour
     {
         // 1. 모든 적을 찾는다.
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-
         
+        transform.Translate(-transform.position * _player.Speed * Time.deltaTime);
+        
+
+
+
         if (enemies == null || enemies.Length == 0)
         {
-            transform.Translate(-transform.position * _player.Speed * Time.deltaTime);
             return;
         }
         // 2. 가장 가까운 적을 찾는다.
