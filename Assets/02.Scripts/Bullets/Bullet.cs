@@ -38,7 +38,6 @@ public class Bullet : MonoBehaviour
 
         Vector2 position = transform.position;  // 현재 위치
 
-
         // 가속도를 준다 속도가 점점 TargetSpeed 까지 높아지는데 걸리는 시간 TargetTime 초
         // Time.deltaTime : 1초에 60프레임, 120프레임 등 프레임이 일정하지 않은 경우 프레임에 상관없이 1초 동안의 시간을 일정하게 맞춰주는 역할
 

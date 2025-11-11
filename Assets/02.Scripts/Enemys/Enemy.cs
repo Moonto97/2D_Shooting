@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 // Enum : 열거형 : 기억하기 어려운 상수들을 기억하기 쉬운 이름 하나로 묶어 관리하는 표현 방식
@@ -43,7 +42,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-
         // 두가지 타입
         if(Type == EEnemyType.Directional)
         {
@@ -63,10 +61,6 @@ public class Enemy : MonoBehaviour
         // 2. 쪼개고 나니까 똑같은 기능/속성이 있네 -> 상속
         // 상속을 하자니 하는 일이 너무 많고, ---> 조합
         // 재현씨 코드가 강사님이 의도한 조합을 잘 이용한 케이스니 참고해보자 -> 슬렉 11.06 실습과제 댓글에 깃주소 있음.
-
-
-            
-
     }
 
     private void MoveDirectional() // 직선 이동 타입
@@ -105,13 +99,7 @@ public class Enemy : MonoBehaviour
             {
                 DropItem(Random.Range(1, _healthDropRate + _moveSpeedDropRate + _fireRateDropRate));
             }
-        }
-
-        IEnumerator IdleTimer()     // 1초 후 에니메이터에 Idle 트리거 실행
-        {
-            yield return new WaitForSeconds(1);
-            _animator.SetTrigger("Idle");  
-        }
+        }     
     }
 
    
