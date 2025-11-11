@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour
     [Header("템드랍율")]
     public float EnemyDropRate = 50f;
 
+    [Header("폭발이펙트프리펩")]
+    public GameObject ExplosionPrefab;
+
     private void Update()
     {
 
@@ -81,6 +84,8 @@ public class Enemy : MonoBehaviour
         _health -= damage;
         if (_health <= 0f)
         {
+            MakeExplosionEffect();
+
             Destroy(this.gameObject);
             int randomNumber = Random.Range(1, 100);
             if (randomNumber <= EnemyDropRate)
@@ -118,6 +123,12 @@ public class Enemy : MonoBehaviour
             fireRateItem.transform.position = transform.position;
         }
 
+    }
+
+    private void MakeExplosionEffect()
+    {
+
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
     }
 
 }
