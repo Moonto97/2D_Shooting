@@ -23,7 +23,6 @@ public class PlayerAutoMove : MonoBehaviour
 
         if (enemies == null || enemies.Length == 0)
         {
-            transform.Translate(-transform.position * _player.Speed * Time.deltaTime);
             return;
         }
         // 2. 가장 가까운 적을 찾는다.
