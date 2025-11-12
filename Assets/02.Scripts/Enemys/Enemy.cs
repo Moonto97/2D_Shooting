@@ -91,15 +91,27 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("Hit");  // 애니메이터에 Hit 트리거 실행
         if (_health <= 0f)
         {
-            MakeExplosionEffect();
-
-            Destroy(this.gameObject);
-            int randomNumber = Random.Range(1, 100);
-            if (randomNumber <= EnemyDropRate)
-            {
-                DropItem(Random.Range(1, _healthDropRate + _moveSpeedDropRate + _fireRateDropRate));
-            }
+            Death();
         }     
+    }
+
+    private void Death()
+    {
+        MakeExplosionEffect();
+
+        Destroy(this.gameObject);
+        int randomNumber = Random.Range(1, 100);
+        if (randomNumber <= EnemyDropRate)
+        {
+            DropItem(Random.Range(1, _healthDropRate + _moveSpeedDropRate + _fireRateDropRate));
+        }
+        
+        // 응집도를 높여라
+        // 응집도 : 데이터와 데이터를 조작하는 로직이 얼마나 잘 모여있냐??
+        // 응집도를 높이고, 필요한 것만 외부에 공개하는 것을 '캡슐화' 라고 한다.
+        ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
+        scoreManager.AddScore(100);     // 100 매직넘버 수정
+        scoreManager.CurrentScoreTextUI.text = $"현재 점수 : {scoreManager.CurrentScore}";
     }
 
    

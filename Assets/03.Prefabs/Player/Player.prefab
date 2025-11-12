@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5279635736306040280}
   - component: {fileID: -9106095774914317686}
   - component: {fileID: 4651863781859931566}
-  - component: {fileID: -790035391870185633}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -111,6 +110,7 @@ MonoBehaviour:
   FireInterval: 0.3
   CoolTime: 0.6
   MaxCoolTime: 0.3
+  UltimatePrefab: {fileID: 5002386648196581005, guid: 7527525092ed72b46bebde6b0249ade7, type: 3}
 --- !u!114 &5279635736306040280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,16 +165,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-790035391870185633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872043688693902055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87051dc3e02b0304dad2fefafa7962e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UltimatePrefab: {fileID: 5002386648196581005, guid: 7527525092ed72b46bebde6b0249ade7, type: 3}
