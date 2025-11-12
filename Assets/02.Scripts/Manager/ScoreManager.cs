@@ -20,12 +20,53 @@ public class ScoreManager : MonoBehaviour
     {
         if (score <= 0) return;
         _currentScore += score;
+        Refresh();
     }
 
     private void Refresh()
     {
-        
         _currentScoreTextUI.text = $"현재 점수 : {_currentScore}";
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            TestSave();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            TestLoad();
+        }
+    }
+
+    private void TestSave()
+    {
+        // 유니티에서는 값을 저장할 때 'PlayerPrefs' 모듈을 쓴다.
+        // 저장 가능한 자료형 : int, float, string
+        // 저장할 때 저장할 이름(key)과 값 (value) 이 두 형태로 저장한다.
+        // 저장 : Set
+        // 로드 : Get
+
+        PlayerPrefs.SetInt("age", 19);
+        PlayerPrefs.SetString("name", "김홍일");
+        Debug.Log("저장됐습니다.");
+    }
+
+    private void TestLoad()
+    {
+        int age = PlayerPrefs.GetInt("age");
+
+        //------------------------------------
+        if (PlayerPrefs.HasKey("age"))
+        {
+            age = PlayerPrefs.GetInt("age");
+        }
+        
+        //------------------------------------
+        string name = PlayerPrefs.GetString("name");
+
+        Debug.Log($"{name}: {age}");
     }
 }
 

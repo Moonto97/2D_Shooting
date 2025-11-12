@@ -35,6 +35,9 @@ public class Enemy : MonoBehaviour
     [Header("애니메이터")]
     private Animator _animator;
 
+    [Header("적1마리당 점수")]
+    private int Score = 100;
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -110,8 +113,7 @@ public class Enemy : MonoBehaviour
         // 응집도 : 데이터와 데이터를 조작하는 로직이 얼마나 잘 모여있냐??
         // 응집도를 높이고, 필요한 것만 외부에 공개하는 것을 '캡슐화' 라고 한다.
         ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
-        scoreManager.AddScore(100);     // 100 매직넘버 수정
-        scoreManager.CurrentScoreTextUI.text = $"현재 점수 : {scoreManager.CurrentScore}";
+        scoreManager.AddScore(Score);     // 100 매직넘버 수정
     }
 
    
