@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour
     [Header("적1마리당 점수")]
     private int Score = 100;
 
+    [Header("폭발SFX")]
+    public AudioClip EnemyDeathSound;
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -102,6 +105,16 @@ public class Enemy : MonoBehaviour
     {
         MakeExplosionEffect();
 
+        GameObject audioObject = new GameObject("EnemyDeathSound");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.clip = EnemyDeathSound;
+        audioSource.Play();
+        // enemy가 파괴되면서 소리도 함께 사라지므로
+        // audioObject 라는 가상의 오브젝트를 새로 메모리에 생성한 후 
+        // AudioSource 컴포넌트를 생성한 오브젝트에 넣어줌
+        // audioSource.clip 이 뭔지 알려준다음
+        // 플레이
+        Destroy(audioObject,EnemyDeathSound.length);
         Destroy(this.gameObject);
         int randomNumber = Random.Range(1, 100);
         if (randomNumber <= EnemyDropRate)
@@ -114,6 +127,7 @@ public class Enemy : MonoBehaviour
         // 응집도를 높이고, 필요한 것만 외부에 공개하는 것을 '캡슐화' 라고 한다.
         ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
         scoreManager.AddScore(Score);     // 100 매직넘버 수정
+
     }
 
    

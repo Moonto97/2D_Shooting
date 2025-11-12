@@ -111,6 +111,7 @@ MonoBehaviour:
   CoolTime: 0.6
   MaxCoolTime: 0.3
   UltimatePrefab: {fileID: 5002386648196581005, guid: 7527525092ed72b46bebde6b0249ade7, type: 3}
+  FireSound: {fileID: 0}
 --- !u!114 &5279635736306040280
 MonoBehaviour:
   m_ObjectHideFlags: 0

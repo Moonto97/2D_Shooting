@@ -174,6 +174,7 @@ MonoBehaviour:
   MoveSpeedItemPrefab: {fileID: 23516748427535373, guid: d0d09284649a08a41b00835485e49aaa, type: 3}
   EnemyDropRate: 50
   ExplosionPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
+  EnemyDeathSound: {fileID: 8300000, guid: c2b8d32f0725e9144b711463cc117923, type: 3}
 --- !u!95 &7264242221618250360
 Animator:
   serializedVersion: 7
