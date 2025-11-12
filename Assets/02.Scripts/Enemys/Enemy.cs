@@ -105,16 +105,18 @@ public class Enemy : MonoBehaviour
     {
         MakeExplosionEffect();
 
-        GameObject audioObject = new GameObject("EnemyDeathSound");
+        GameObject audioObject = new GameObject("EDeathObject");
         AudioSource audioSource = audioObject.AddComponent<AudioSource>();
         audioSource.clip = EnemyDeathSound;
         audioSource.Play();
+        Destroy(audioObject, EnemyDeathSound.length);
         // enemy가 파괴되면서 소리도 함께 사라지므로
         // audioObject 라는 가상의 오브젝트를 새로 메모리에 생성한 후 
         // AudioSource 컴포넌트를 생성한 오브젝트에 넣어줌
         // audioSource.clip 이 뭔지 알려준다음
         // 플레이
-        Destroy(audioObject,EnemyDeathSound.length);
+        // 오디오의 길이만큼 플레이한 후 파괴하도록 설정.
+
         Destroy(this.gameObject);
         int randomNumber = Random.Range(1, 100);
         if (randomNumber <= EnemyDropRate)

@@ -9,6 +9,7 @@ public class MoveSpeedItem : MonoBehaviour
     public float TraceSpeed = 4f;
     private Player _player;
     public GameObject ConsumeEffect;
+    public AudioClip ItemSFX;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class MoveSpeedItem : MonoBehaviour
         if (!other.gameObject.CompareTag("Player")) return;
         PlayerMove playerMove = other.gameObject.GetComponent<PlayerMove>();
         playerMove.SpeedUp(SpeedBoostAmount);
+        SFXObject();
         Destroy(this.gameObject);
         float randomDegree = Random.Range(0, 359);
         Instantiate(ConsumeEffect, _player.transform.position, Quaternion.Euler(0, 0, randomDegree));
@@ -43,6 +45,16 @@ public class MoveSpeedItem : MonoBehaviour
 
         Vector2 itemDirection = (playerPosition - itemPosition).normalized;
         transform.Translate(itemDirection * TraceSpeed * Time.deltaTime);
+    }
+
+    private void SFXObject()
+    {
+        // SFX
+        GameObject audioObject = new GameObject("ItemSFX");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.clip = ItemSFX;
+        audioSource.Play();
+        Destroy(audioObject, ItemSFX.length);
     }
 
 }

@@ -9,6 +9,7 @@ public class HealthItem : MonoBehaviour
 
     private Player _player;
     public GameObject ConsumeEffect;
+    public AudioClip ItemSFX;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class HealthItem : MonoBehaviour
         if (!other.gameObject.CompareTag("Player")) return;
         PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
         playerHealth.Heal(HealAmount);
+        SFXObject();
         Destroy(this.gameObject);
         float randomDegree = UnityEngine.Random.Range(0, 359);
         Instantiate(ConsumeEffect, _player.transform.position, Quaternion.Euler(0,0, randomDegree));
@@ -41,6 +43,15 @@ public class HealthItem : MonoBehaviour
 
         Vector2 itemDirection = (playerPosition - itemPosition).normalized;
         transform.Translate(itemDirection * TraceSpeed * Time.deltaTime);
+    }
+    private void SFXObject()
+    {
+        // SFX
+        GameObject audioObject = new GameObject("ItemSFX");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.clip = ItemSFX;
+        audioSource.Play();
+        Destroy(audioObject, ItemSFX.length);
     }
 
 }

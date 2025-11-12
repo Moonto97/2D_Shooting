@@ -200,6 +200,7 @@ MonoBehaviour:
   ReduceCoolTime: 0.1
   TraceSpeed: 4
   ConsumePrefab: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
+  ItemSFX: {fileID: 8300000, guid: 5505dfc80e1ca8e479d83be97a52f009, type: 3}
 --- !u!95 &-2082707740256473569
 Animator:
   serializedVersion: 7

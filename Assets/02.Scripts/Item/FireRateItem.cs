@@ -9,10 +9,11 @@ public class FireRateItem : MonoBehaviour
     public float TraceSpeed = 4f;
     public GameObject ConsumePrefab;
     private Player _player;
+    [Header("아이템획득SFX")]
+    public AudioClip ItemSFX;
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        
     }
 
     void Update()
@@ -29,6 +30,8 @@ public class FireRateItem : MonoBehaviour
         if (!other.gameObject.CompareTag("Player")) return;
         PlayerFire playerFire = other.gameObject.GetComponent<PlayerFire>();
         playerFire.PowerUp(ReduceCoolTime);
+        SFXObject();
+
         Destroy(this.gameObject);
         float randomDegree = UnityEngine.Random.Range(0, 360f);
         Instantiate(ConsumePrefab, _player.transform.position , Quaternion.Euler(0, 0, randomDegree));
@@ -42,6 +45,16 @@ public class FireRateItem : MonoBehaviour
 
         Vector2 itemDirection = (playerPosition - itemPosition).normalized;
         transform.Translate(itemDirection * TraceSpeed * Time.deltaTime);
+    }
+
+    private void SFXObject()
+    {
+        // SFX
+        GameObject audioObject = new GameObject("ItemSFX");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.clip = ItemSFX;
+        audioSource.Play();
+        Destroy(audioObject, ItemSFX.length);
     }
 
 }

@@ -4,7 +4,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public float Health = 3f;
     public float MaxHealth = 3f;
-   
+    public AudioClip GameOverSFX;
+
     void Start()
     {
         Health = 3f;
@@ -19,11 +20,22 @@ public class PlayerHealth : MonoBehaviour
 
         if (Health <= 0f)
         {
+            SFXObject();
             Destroy(this.gameObject);
+
         }
 
        
         
+    }
+    private void SFXObject()
+    {
+        // SFX
+        GameObject audioObject = new GameObject("GameOverSFX");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.clip = GameOverSFX;
+        audioSource.Play();
+        Destroy(audioObject, GameOverSFX.length);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

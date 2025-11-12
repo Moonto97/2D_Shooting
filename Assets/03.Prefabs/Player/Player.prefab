@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 3
   MaxHealth: 3
+  GameOverSFX: {fileID: 8300000, guid: 25564f91c9f650f48a5c77ad298fda01, type: 3}
 --- !u!95 &4651863781859931566
 Animator:
   serializedVersion: 7
