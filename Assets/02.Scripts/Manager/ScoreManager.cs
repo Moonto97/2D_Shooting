@@ -9,64 +9,36 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Text _currentScoreTextUI;
     // - 현재 점수를 기억할 변수
     private int _currentScore = 0;
-    
+    private const string ScoreKey = "Score";
     
     private void Start()
     {
+        Load();
         Refresh();
     }
 
+    // 하나의 메서드는 한 가지 일만 잘 하면 된다.
     public void AddScore(int score)
     {
         if (score <= 0) return;
         _currentScore += score;
         Refresh();
+        Save();
     }
 
     private void Refresh()
     {
-        _currentScoreTextUI.text = $"현재 점수 : {_currentScore}";
+        _currentScoreTextUI.text = $"현재 점수 : {_currentScore:N0}";
     }
 
-    private void Update()
+    private void Save()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            TestSave();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            TestLoad();
-        }
+        PlayerPrefs.SetInt("Score", _currentScore);
     }
 
-    private void TestSave()
+    private void Load()
     {
-        // 유니티에서는 값을 저장할 때 'PlayerPrefs' 모듈을 쓴다.
-        // 저장 가능한 자료형 : int, float, string
-        // 저장할 때 저장할 이름(key)과 값 (value) 이 두 형태로 저장한다.
-        // 저장 : Set
-        // 로드 : Get
-
-        PlayerPrefs.SetInt("age", 19);
-        PlayerPrefs.SetString("name", "김홍일");
-        Debug.Log("저장됐습니다.");
-    }
-
-    private void TestLoad()
-    {
-        int age = PlayerPrefs.GetInt("age");
-
-        //------------------------------------
-        if (PlayerPrefs.HasKey("age"))
-        {
-            age = PlayerPrefs.GetInt("age");
-        }
-        
-        //------------------------------------
-        string name = PlayerPrefs.GetString("name");
-
-        Debug.Log($"{name}: {age}");
+        _currentScore = PlayerPrefs.GetInt(ScoreKey, 0);
     }
 }
 
