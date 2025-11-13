@@ -24,7 +24,7 @@ public class RightSubBullet : MonoBehaviour
         _speed += Time.deltaTime * acceleration;  
         _speed = Mathf.Min(_speed, TargetSpeed); // _speed 가 TargetSpeed 보다 커지면 TargetSpeed 로 고정
 
-        Vector2 direction = new Vector2(Angle, 1f); // 방향 백터 설정
+        Vector2 direction = new Vector2(Angle, 1f).normalized; // 방향 백터 설정
 
         Vector2 position = transform.position;  // 현재 위치
 
@@ -40,7 +40,8 @@ public class RightSubBullet : MonoBehaviour
         Enemy enemy = other.GetComponent<Enemy>();  // 충돌한 상대방 오브젝트의 Enemy 컴포넌트를 가져온다.
         enemy.Hit(BulletDamage);  // 상대방 오브젝트의 Hit 메서드를 호출하면서 데미지 값을 전달한다.
 
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+        
     }
 }
 

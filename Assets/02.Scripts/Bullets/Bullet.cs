@@ -61,7 +61,7 @@ public class Bullet : MonoBehaviour
         // GetComponent 는 게임 오브젝트에 붙어있는 컴포넌트를 가져올 수 있다.
 
 
-        Destroy(this.gameObject);   // this.gameObject 이 스크립트를 가지고 있는 오브젝트를 뜻함
+        this.gameObject.SetActive(false);   // this.gameObject 이 스크립트를 가지고 있는 오브젝트를 뜻함
         
         
         // 객체 간의 상호작용을 할 때 묻지말고 시켜라.

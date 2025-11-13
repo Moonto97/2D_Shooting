@@ -4,7 +4,7 @@ public class DestroyZone : MonoBehaviour
 {
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(other.gameObject);
+        other.gameObject.SetActive(false);
     }
 
 }

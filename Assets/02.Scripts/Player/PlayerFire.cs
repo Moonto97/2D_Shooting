@@ -77,17 +77,11 @@ public class PlayerFire : MonoBehaviour
             //                                인스턴스화 한다는 의미
             
 
-            GameObject bullet1 = Instantiate(bulletPrefab);
-            bullet1.transform.position = FirePosition.position + new Vector3(-FireInterval, 0f, 0f);
-
-            GameObject bullet2 = Instantiate(bulletPrefab);
-            bullet2.transform.position = FirePosition.position + new Vector3(FireInterval, 0f, 0f);
-
-            GameObject subBullet1 = Instantiate(leftSubBulletPrefab);
-            subBullet1.transform.position = FirePosition.position + new Vector3(-FireInterval * 2f, 0f, 0f);
-            GameObject subBullet2 = Instantiate(rightSubBulletPrefab);   
-            subBullet2.transform.position = FirePosition.position + new Vector3(FireInterval * 2f, 0f, 0f);
-
+            
+            BulletFactory.Instance.MakeBullet(FirePosition.position + new Vector3(FireInterval, 0 ,0));
+            BulletFactory.Instance.MakeBullet(FirePosition.position + new Vector3 (- FireInterval, 0, 0));
+            BulletFactory.Instance.MakeRightBullet(FirePosition.position + new Vector3(+ 1, 0, 0));
+            BulletFactory.Instance.MakeLeftBullet(FirePosition.position + new Vector3 (- 1, 0, 0));
             _fireTimer = CoolTime;
 
         }
@@ -101,11 +95,5 @@ public class PlayerFire : MonoBehaviour
         {
             CoolTime = MaxCoolTime;
         }
-    }
-
-    private void MakeBullet()
-    {
-        BulletFactory bulletFactory = GameObject.Find("BulletFactory").GetComponent<BulletFactory>();
-        bulletFactory.MakeBullet(FirePosition.position);
     }
 }
