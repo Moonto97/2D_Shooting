@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ScoreManager : MonoBehaviour
+    // 스코어매니저는 단 하나여야 하고 전역적인 접근점을 제공해야한다. 싱글톤.
 {
     // 목표 : 적을 죽을 때마다 점수를 올리고, 현재 점수를 UI에 표시하고 싶다.
     // 필요 속성
@@ -13,7 +14,19 @@ public class ScoreManager : MonoBehaviour
     private const string ScoreKey = "Score";
     // 텍스트의 Rect Transform 캐싱
     private RectTransform _scoreRectTransform;
-    
+
+    private static ScoreManager _instance;  // 다른곳에서 건드리지 못하게 은닉화 private
+    public static ScoreManager Instance => _instance;   // Getter 프로퍼티로 접근 전역성을 확보
+    private void Awake()
+    {
+        if(_instance != null)    // 싱글톤. 관리자는 하나여야만 한다.
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        _instance = this;
+    }
+
     private void Start()
     {
         _scoreRectTransform = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<RectTransform>();

@@ -80,8 +80,11 @@ public class Enemy : MonoBehaviour
         GameObject playerObject = GameObject.FindWithTag("Player");
         Vector2 playerPosition = playerObject.transform.position;
         Vector2 enemyPosition = transform.position;
-
         Vector2 enemyDirection = (playerPosition - enemyPosition).normalized;
+
+        float angle = Mathf.Atan2(enemyDirection.y, enemyDirection.x) * Mathf.Rad2Deg;
+        angle += 90f;
+        transform.rotation = Quaternion.Euler (0f, 0f, angle);
         transform.Translate(enemyDirection* MoveSpeed * Time.deltaTime);
 
     }
@@ -127,8 +130,15 @@ public class Enemy : MonoBehaviour
         // 응집도를 높여라
         // 응집도 : 데이터와 데이터를 조작하는 로직이 얼마나 잘 모여있냐??
         // 응집도를 높이고, 필요한 것만 외부에 공개하는 것을 '캡슐화' 라고 한다.
-        ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
-        scoreManager.AddScore(Score);     // 100 매직넘버 수정
+        
+        ScoreManager.Instance.AddScore(Score);     // 싱글톤.
+                                                   // 스코어매니저로의 전역적인 접근 가능
+                                                   // 굳이 게임오브젝트를 찾고 컴포넌트를 불러오지 않아도
+                                                   // ScoreManager.Instance 로 접근
+
+        // 관리자는 인스턴스가 단 하나다. 혹은 단 하나임을 보장해야 한다.
+        // 아무대서나 빠르게 접근하고 싶다.
+        // 싱글톤 패턴
 
     }
 
