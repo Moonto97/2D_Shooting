@@ -108,13 +108,15 @@ public class Enemy : MonoBehaviour
     private void Death()
     {
         _health = Maxhealth;
+        transform.rotation = Quaternion .identity;
         MakeExplosionEffect();
 
         GameObject audioObject = new GameObject("EDeathObject");
         AudioSource audioSource = audioObject.AddComponent<AudioSource>();
         audioSource.clip = EnemyDeathSound;
         audioSource.Play();
-        
+        Destroy(audioObject, EnemyDeathSound.length);
+
         // enemy가 파괴되면서 소리도 함께 사라지므로
         // audioObject 라는 가상의 오브젝트를 새로 메모리에 생성한 후 
         // AudioSource 컴포넌트를 생성한 오브젝트에 넣어줌

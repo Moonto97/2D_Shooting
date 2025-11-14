@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
         
         
         if (!other.gameObject.CompareTag("Enemy")) return;  // other.gameObject.name 으로 하는 것은 위험. tag 로 구분하는 것이 더 안전
-        Destroy(other.gameObject);  // 충돌한 적 오브젝트 파괴
+        other.gameObject.SetActive(false);  // 충돌한 적 오브젝트 파괴
         
         
 
