@@ -103,11 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26dd914242b93da479a503bba7de2833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7441310830686128009, guid: d26edafe20f227f4bb3de8f81cd0d0a1, type: 3}
-  leftSubBulletPrefab: {fileID: 3184296445790383646, guid: ad0c7d05d7838bd4ea391c01f09a52dc, type: 3}
-  rightSubBulletPrefab: {fileID: 3184296445790383646, guid: fffa5f6799b9d294ca51c436be0ce34d, type: 3}
   FirePosition: {fileID: 8370862437482048167, guid: 4ce40f7ed76cdd146af002e30b5cdd27, type: 3}
-  FireInterval: 0.3
+  FireInterval: 0.15
   CoolTime: 0.6
   MaxCoolTime: 0.3
   UltimatePrefab: {fileID: 5002386648196581005, guid: 7527525092ed72b46bebde6b0249ade7, type: 3}

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-   
 
     public GameObject[] EnemyPrefabs;
 
@@ -32,15 +31,11 @@ public class EnemySpawner : MonoBehaviour
             //3. 적 생성
             if (UnityEngine.Random.Range(0, 100) < 70)
             {
-                GameObject enemy = Instantiate(EnemyPrefabs[(int)EEnemyType.Directional]);  // (int)열거형 형변환 Enemy에 열거해놓은 EnemyType 에서 0번째인 Directional 을 가져옴
-                enemy.transform.position = transform.position;
-                _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
+                EnemyFactory.Instance.MakeEnemy(transform.position);
             }
             else
             {
-                GameObject enemy = Instantiate(EnemyPrefabs[(int)EEnemyType.Trace]);
-                enemy.transform.position = transform.position;
-                _randomCoolTime = Random.Range(CoolTimeMin, CoolTimeMax);
+                EnemyFactory.Instance.MakeTraceEnemy(transform.position);
             }
         }
     }

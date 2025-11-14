@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
         // 플레이
         // 오디오의 길이만큼 플레이한 후 파괴하도록 설정.
 
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
         int randomNumber = Random.Range(1, 100);
         if (randomNumber <= EnemyDropRate)
         {

@@ -5,7 +5,6 @@ public class Player : MonoBehaviour
     public float Speed = 3;
 
     public bool AutoMode = false;
-
     
 
     private void Start()
@@ -15,9 +14,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
-
-        if(AutoMode)
+        if (AutoMode)
         {
             // 자동 모드
             PlayerAutoMove autoMove = GetComponent<PlayerAutoMove>();
