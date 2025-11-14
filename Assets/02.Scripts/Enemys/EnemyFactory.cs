@@ -37,7 +37,7 @@ public class EnemyFactory : MonoBehaviour
     private void TraceEnemyPoolInit()
     {
         _traceEnemyPool = new GameObject[PoolSize];
-        for (int i = 0; i < _enemyPool.Length; i++)
+        for (int i = 0; i < _traceEnemyPool.Length; i++)
         {
             GameObject traceEnemyObject = Instantiate(TraceEnemyPrefab);
             _traceEnemyPool[i] = traceEnemyObject;
