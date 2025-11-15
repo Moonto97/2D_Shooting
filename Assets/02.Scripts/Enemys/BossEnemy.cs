@@ -8,20 +8,20 @@ public class BossEnemy : MonoBehaviour
     private float _health = 500f;
     private float _maxHealth = 500;
     private float _bossDamage = 2f;
-    [Header("폭발프리펩")]
-    public GameObject ExplisionPrefab;
+    //[Header("폭발프리펩")]
+    //public GameObject ExplisionPrefab;
     [Header("점수")]
     private int Score = 500;
-    [Header("폭발SFX")]
-    public AudioClip BossDeathSound;
-    [Header("애니메이터")]
-    private Animator _animator;
+    //[Header("폭발SFX")]
+    //public AudioClip BossDeathSound;
+    //[Header("애니메이터")]
+    //private Animator _animator;
 
     private GameObject _enemySpawner;
     // 공격 구현 예정
     private void Start()
     {
-        _animator = GetComponent<Animator>();    // 캠퍼스가서 애니메이션 삽입.
+        //_animator = GetComponent<Animator>();    // 캠퍼스가서 애니메이션 삽입.
         _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner");
         Vector3 enemySpawnerPosition = _enemySpawner.transform.position;
         transform.position = enemySpawnerPosition;

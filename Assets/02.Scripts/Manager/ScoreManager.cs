@@ -17,6 +17,8 @@ public class ScoreManager : MonoBehaviour
 
     private static ScoreManager _instance;  // 다른곳에서 건드리지 못하게 은닉화 private
     public static ScoreManager Instance => _instance;   // Getter 프로퍼티로 접근 전역성을 확보
+    private int _bossSpawnScore = 1000;
+
     private void Awake()
     {
         if(_instance != null)    // 싱글톤. 관리자는 하나여야만 한다.
@@ -46,6 +48,7 @@ public class ScoreManager : MonoBehaviour
         Refresh();
         Save();
         ScaleConverter();
+        if (CurrentScore > _bossSpawnScore) SpawnBoss();
     }
 
     private void Refresh()
@@ -73,6 +76,10 @@ public class ScoreManager : MonoBehaviour
         _scoreRectTransform.localScale = new Vector3(1.3f, 1.3f, 1);
         yield return new WaitForSeconds(0.2f);
         _scoreRectTransform .localScale = new Vector3(1f, 1f, 1);
+    }
+    private void SpawnBoss()
+    {
+        EnemyFactory.Instance.MakeBoss();
     }
     
 }
