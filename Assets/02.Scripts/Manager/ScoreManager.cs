@@ -29,6 +29,9 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        // 보스등장조건설정위해 캐싱
+
+        // UI 설정
         _scoreRectTransform = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<RectTransform>();
         Load();
         CurrentScore = 0;
@@ -71,5 +74,6 @@ public class ScoreManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         _scoreRectTransform .localScale = new Vector3(1f, 1f, 1);
     }
+    
 }
 
