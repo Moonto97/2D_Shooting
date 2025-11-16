@@ -61,9 +61,10 @@ public class BossEnemy : MonoBehaviour
 
         
         _animator.SetTrigger("Idle");
-        Destroy(this.gameObject);
         
-        ScoreManager.Instance.AddScore(Score);     
+        
+        ScoreManager.Instance.AddScore(Score);
+        Destroy(this.gameObject);
     }
     private void MakeExplosionEffect()
     {
