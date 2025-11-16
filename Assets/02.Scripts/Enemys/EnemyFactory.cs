@@ -7,10 +7,15 @@ public class EnemyFactory : MonoBehaviour
     [Header("적프리팹")]
     public GameObject EnemyPrefab;
     public GameObject TraceEnemyPrefab;
+    public GameObject BossPrefab;
     [Header("풀링")]
     public int PoolSize = 20;
     private GameObject[] _enemyPool;
     private GameObject[] _traceEnemyPool;
+    [Header("보스속성")]
+    private Vector3 _bossPosition = new Vector3 (0f, 6f, 0f);
+    
+
 
     private void Awake()
     {
@@ -73,6 +78,12 @@ public class EnemyFactory : MonoBehaviour
             }
         }
         return null;
+    }
+    public GameObject MakeBoss()
+    {
+        GameObject BossObject = Instantiate(BossPrefab);
+        BossObject.transform.position = _bossPosition;
+        return BossObject;
     }
 }
 

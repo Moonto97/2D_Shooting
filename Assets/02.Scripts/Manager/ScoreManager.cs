@@ -17,6 +17,8 @@ public class ScoreManager : MonoBehaviour
 
     private static ScoreManager _instance;  // 다른곳에서 건드리지 못하게 은닉화 private
     public static ScoreManager Instance => _instance;   // Getter 프로퍼티로 접근 전역성을 확보
+    private int _bossSpawnScore = 1000;
+
     private void Awake()
     {
         if(_instance != null)    // 싱글톤. 관리자는 하나여야만 한다.
@@ -29,6 +31,9 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        // 보스등장조건설정위해 캐싱
+
+        // UI 설정
         _scoreRectTransform = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<RectTransform>();
         Load();
         CurrentScore = 0;
@@ -42,12 +47,13 @@ public class ScoreManager : MonoBehaviour
         CurrentScore += score;
         Refresh();
         Save();
-        ScaleConverter();
+        ActiveScaleConverter();
+        if (CurrentScore == _bossSpawnScore) EnemyFactory.Instance.MakeBoss();
     }
 
     private void Refresh()
     {
-        _currentScoreTextUI.text = $"현재 점수 : {CurrentScore:N0}";
+        _currentScoreTextUI.text = $"현재 점수 : {CurrentScore}";
     }
 
     private void Save()
@@ -61,7 +67,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     // 스케일 키우기
-    private void ScaleConverter()
+    private void ActiveScaleConverter()
     {
         StartCoroutine(WaitSeconds());
     }
@@ -70,6 +76,6 @@ public class ScoreManager : MonoBehaviour
         _scoreRectTransform.localScale = new Vector3(1.3f, 1.3f, 1);
         yield return new WaitForSeconds(0.2f);
         _scoreRectTransform .localScale = new Vector3(1f, 1f, 1);
-    }
+    }   
 }
 

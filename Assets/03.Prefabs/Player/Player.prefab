@@ -106,7 +106,7 @@ MonoBehaviour:
   FirePosition: {fileID: 8370862437482048167, guid: 4ce40f7ed76cdd146af002e30b5cdd27, type: 3}
   FireInterval: 0.15
   CoolTime: 0.6
-  MaxCoolTime: 0.3
+  MaxCoolTime: 0.15
   UltimatePrefab: {fileID: 5002386648196581005, guid: 7527525092ed72b46bebde6b0249ade7, type: 3}
   FireSound: {fileID: 0}
 --- !u!114 &5279635736306040280
