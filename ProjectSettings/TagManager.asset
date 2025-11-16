@@ -12,6 +12,8 @@ TagManager:
   - ScoreManager
   - ScoreText
   - HighScoreText
+  - FxTemporaire
+  - Boss
   layers:
   - Default
   - TransparentFX

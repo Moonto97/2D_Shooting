@@ -5,39 +5,78 @@ public class BossEnemy : MonoBehaviour
 {
     [Header("스텟")]
     public float MoveSpeed = 2f;
-    private float _health = 500f;
-    private float _maxHealth = 500;
+    private float _health = 1000f;
     private float _bossDamage = 2f;
-    //[Header("폭발프리펩")]
-    //public GameObject ExplisionPrefab;
     [Header("점수")]
     private int Score = 500;
-    //[Header("폭발SFX")]
-    //public AudioClip BossDeathSound;
-    //[Header("애니메이터")]
-    //private Animator _animator;
+    [Header("애니메이터")]
+    private Animator _animator;
+    private Vector3 BossPosition = new Vector3(0f, 4f, 0f);
+    [Header("사운드")]
+    public AudioClip BossDeathSound;
+    [Header("폭발이펙트")]
+    public GameObject ExplosionEffect;
 
-    private GameObject _enemySpawner;
-    // 공격 구현 예정
+    private PlayerHealth _playerHealth;
+
     private void Start()
     {
-        //_animator = GetComponent<Animator>();    // 캠퍼스가서 애니메이션 삽입.
-        _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner");
-        Vector3 enemySpawnerPosition = _enemySpawner.transform.position;
-        transform.position = enemySpawnerPosition;
+        _animator = GetComponent<Animator>(); 
+        Vector3 bossPosition = transform.position;
+        GameObject player = GameObject.FindWithTag("Player");
+        _playerHealth = player.GetComponent<PlayerHealth>();
+        
     }
 
     private void Update()
     {
-        // 원점으로 이동시킨다. 일정 스코어 달성 시 << 등장조건: 스코어매니저에서 호출해서 스폰하도록 설정
-        MoveZero();
+        
+        Move();
 
     }
-    private void MoveZero() 
+    private void Move() 
     {
-        Vector2 vector = (Vector3.zero - transform.position).normalized;
+        Vector2 vector = (BossPosition - transform.position).normalized;
         transform.Translate(vector * MoveSpeed * Time.deltaTime);
 
     }
+    public void Hit(float damage)
+    {
+        _health -= damage;
+        _animator.SetTrigger("Hit");  // 애니메이터에 Hit 트리거 실행
+        if (_health <= 0f)
+        {
+            Death();
+        }
+    }
+    private void Death()
+    {
+        MakeExplosionEffect();
 
+        GameObject audioObject = new GameObject("BDeathObject");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.clip = BossDeathSound;
+        audioSource.Play();
+        Destroy(audioObject, BossDeathSound.length);
+
+        
+        _animator.SetTrigger("Idle");
+        Destroy(this.gameObject);
+        
+        ScoreManager.Instance.AddScore(Score);     
+    }
+    private void MakeExplosionEffect()
+    {
+        Vector3 explosionPosition = new Vector3(1f, 0, 0);
+        GameObject bossExplosion = Instantiate(ExplosionEffect, BossPosition, Quaternion.identity);
+        GameObject bossExplosion2 = Instantiate(ExplosionEffect, BossPosition + explosionPosition, Quaternion.identity);
+        GameObject bossExplosion3 = Instantiate(ExplosionEffect, BossPosition - explosionPosition, Quaternion.identity);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(!other.CompareTag("Player")) return;
+        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+        playerHealth.Hit(_bossDamage);
+    }
 }

@@ -47,13 +47,13 @@ public class ScoreManager : MonoBehaviour
         CurrentScore += score;
         Refresh();
         Save();
-        ScaleConverter();
-        if (CurrentScore > _bossSpawnScore) SpawnBoss();
+        ActiveScaleConverter();
+        if (CurrentScore == _bossSpawnScore) EnemyFactory.Instance.MakeBoss();
     }
 
     private void Refresh()
     {
-        _currentScoreTextUI.text = $"현재 점수 : {CurrentScore:N0}";
+        _currentScoreTextUI.text = $"현재 점수 : {CurrentScore}";
     }
 
     private void Save()
@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     // 스케일 키우기
-    private void ScaleConverter()
+    private void ActiveScaleConverter()
     {
         StartCoroutine(WaitSeconds());
     }
@@ -76,11 +76,6 @@ public class ScoreManager : MonoBehaviour
         _scoreRectTransform.localScale = new Vector3(1.3f, 1.3f, 1);
         yield return new WaitForSeconds(0.2f);
         _scoreRectTransform .localScale = new Vector3(1f, 1f, 1);
-    }
-    private void SpawnBoss()
-    {
-        EnemyFactory.Instance.MakeBoss();
-    }
-    
+    }   
 }
 

@@ -36,12 +36,18 @@ public class RightSubBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Enemy")) return;
-        Enemy enemy = other.GetComponent<Enemy>();  // 충돌한 상대방 오브젝트의 Enemy 컴포넌트를 가져온다.
-        enemy.Hit(BulletDamage);  // 상대방 오브젝트의 Hit 메서드를 호출하면서 데미지 값을 전달한다.
-
+        if (!other.CompareTag("Enemy") && !other.CompareTag("Boss")) return;
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.GetComponent<Enemy>();  // 충돌한 상대방 오브젝트의 Enemy 컴포넌트를 가져온다.
+            enemy.Hit(BulletDamage);  // 상대방 오브젝트의 Hit 메서드를 호출하면서 데미지 값을 전달한다.
+        }
+        else if (other.CompareTag("Boss"))
+        {
+            BossEnemy boss = other.GetComponent<BossEnemy>();
+            boss.Hit(BulletDamage);
+        }
         this.gameObject.SetActive(false);
-        
     }
 }
 

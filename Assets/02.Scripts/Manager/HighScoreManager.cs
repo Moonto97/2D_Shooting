@@ -40,7 +40,7 @@ public class HighScoreManager : MonoBehaviour
     }
     private void Refresh()
     {
-        _highScoreTextUI.text = $"최고 점수 : {_highScore:N0}";
+        _highScoreTextUI.text = $"최고 점수 : {_highScore}";
     }
     private void Save()
     {

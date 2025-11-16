@@ -12,6 +12,8 @@ public class EnemyFactory : MonoBehaviour
     public int PoolSize = 20;
     private GameObject[] _enemyPool;
     private GameObject[] _traceEnemyPool;
+    [Header("보스속성")]
+    private Vector3 _bossPosition = new Vector3 (0f, 6f, 0f);
     
 
 
@@ -80,6 +82,7 @@ public class EnemyFactory : MonoBehaviour
     public GameObject MakeBoss()
     {
         GameObject BossObject = Instantiate(BossPrefab);
+        BossObject.transform.position = _bossPosition;
         return BossObject;
     }
 }
